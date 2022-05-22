@@ -1,38 +1,141 @@
-.App {
-  text-align: center;
+@import "https://js.arcgis.com/4.23/@arcgis/core/assets/esri/themes/dark/main.css";
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
+#container {
+  position: relative;
   background-color: #282c34;
   min-height: 100vh;
+  width: 100%;
   display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
   color: white;
 }
 
-.App-link {
-  color: #61dafb;
+#sidebar {
+  width: 25%;
+  height: calc(100vh - 40px);
+  padding: 20px 10px;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+#mapview {
+  width: 75%;
+  height: calc(100vh - 40px);
+  background-color: steelblue;
+  padding: 20px 10px;
+}
+
+#viewDiv {
+  padding: 0;
+  margin: 0;
+  height: 100vh;
+  width: 100%;
+}
+
+#search-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+#search-container > * {
+  padding: 5px 10px;
+  border: 2px solid white;
+  outline: none;
+  margin-right: 5px;
+  font-size: 1.1em;
+  transition: all 200ms ease-in-out;
+  border-radius: 2px;
+}
+
+#search-box {
+  border: 2px solid white;
+  margin-right: 5px;
+  width: 60%;
+}
+
+#submit {
+  border: 2px solid steelblue;
+  background-color: steelblue;
+  color: white;
+  cursor: pointer;
+}
+
+#submit:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+#search-box:focus {
+  border: 2px solid steelblue;
+  background-color: #282c34;
+  color: white;
+}
+#submit:hover {
+  border: 2px solid steelblue;
+  background-color: transparent;
+  color: steelblue;
+}
+
+.countries {
+  height: 90vh;
+  padding-bottom: 10px;
+  overflow-y: scroll;
+}
+
+.countries h4 {
+  text-align: left;
+  border-top: 2px solid white;
+  border-left: 2px solid white;
+  border-right: 2px solid white;
+  margin: 0;
+  padding: 10px 15px;
+  transition: all 100ms ease-in-out;
+  cursor: pointer;
+}
+
+.countries h4:hover {
+  background-color: steelblue;
+}
+
+h4:last-child {
+  border-bottom: 2px solid white;
+}
+
+@media screen and (max-width: 600px) {
+  #mapview {
+    width: 100%;
   }
-  to {
-    transform: rotate(360deg);
+
+  #sidebar {
+    width: 80%;
+    position: absolute;
+    top: 0;
+    right: 0;
+    z-index: 99;
+    height: auto;
+  }
+
+  .countries {
+    background-color: #282c34;
+    height: auto;
+    max-height: 90vh;
+  }
+
+  .hide {
+    display: none;
+  }
+
+  p {
+    display: none;
   }
 }
