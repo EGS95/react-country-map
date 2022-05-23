@@ -7,23 +7,21 @@ export default function Sidebar({ zoomToMap }) {
   let [countries, setCountries] = useState([]);
   let [searchText, setSearchText] = useState("");
   let [loading, setLoading] = useState(false);
+  let [searchHidden, setsearchHidden] = useState(false);
   let queryUrl =
     "https://services.arcgis.com/P3ePLMYs2RVChkJx/ArcGIS/rest/services/World_Countries/FeatureServer/0";
 
   useEffect(() => {
-    // handleSearch(null, null);
+    handleSearch();
   }, []);
 
-  const handleSearch = (e, text) => {
+  const handleSearch = () => {
     if (searchText.trim() === "") {
       setCountries([]);
       return;
     }
     let queryObject = new Query();
-    queryObject.where =
-      text !== null
-        ? `COUNTRY like '${text}%'`
-        : `COUNTRY like '${searchText}%'`;
+    queryObject.where = `COUNTRY like '${searchText}%'`;
     queryObject.outFields = ["COUNTRY"];
     queryObject.returnGeometry = true;
     // queryObject.returnCentroid = true;
@@ -31,7 +29,6 @@ export default function Sidebar({ zoomToMap }) {
     query
       .executeQueryJSON(queryUrl, queryObject)
       .then((results) => {
-        console.log(results);
         let countriesArr = [];
         results.features.forEach((element, index) => {
           if (element.attributes.COUNTRY.trim() !== "")
@@ -63,12 +60,13 @@ export default function Sidebar({ zoomToMap }) {
   const handleInput = (e) => {
     setSearchText(e.target.value.trim());
     if (e.keyCode === 13) {
-      handleSearch(e, searchText);
+      handleSearch();
     }
   };
 
   const handleZoom = (item) => {
-    setCountries([]);
+    // setCountries([]);
+    setsearchHidden(true);
     zoomToMap(item.coordinates);
   };
 
@@ -81,18 +79,15 @@ export default function Sidebar({ zoomToMap }) {
           id="search-box"
           onKeyUp={handleInput}
           disabled={loading}
+          onClick={() => setsearchHidden(false)}
         />
-        <button
-          id="submit"
-          onClick={(e) => handleSearch(e, null)}
-          disabled={loading}
-        >
+        <button id="submit" onClick={handleSearch} disabled={loading}>
           Search
         </button>
       </div>
       <div
         id="countries"
-        className={countries.length > 0 ? "countries" : "hide"}
+        className={searchHidden ? "countries hide" : "countries"}
       >
         {countries.length > 0 ? (
           countries.map((item, index) => (
