@@ -29,7 +29,7 @@ body {
 #mapview {
   width: 75%;
   height: calc(100vh - 40px);
-  background-color: steelblue;
+  background-color: red;
   padding: 20px 10px;
 }
 
@@ -64,8 +64,8 @@ body {
 }
 
 #submit {
-  border: 2px solid steelblue;
-  background-color: steelblue;
+  border: 2px solid red;
+  background-color: red;
   color: white;
   cursor: pointer;
 }
@@ -76,19 +76,19 @@ body {
 }
 
 #search-box:focus {
-  border: 2px solid steelblue;
+  border: 2px solid red;
   background-color: #282c34;
   color: white;
 }
 #submit:hover {
-  border: 2px solid steelblue;
+  border: 2px solid red;
   background-color: transparent;
-  color: steelblue;
+  color: red;
 }
 
 .countries {
   height: 90vh;
-  padding-bottom: 10px;
+  /* padding-bottom: 10px; */
   overflow-y: scroll;
 }
 
@@ -104,7 +104,7 @@ body {
 }
 
 .countries h4:hover {
-  background-color: steelblue;
+  background-color: red;
 }
 
 h4:last-child {
